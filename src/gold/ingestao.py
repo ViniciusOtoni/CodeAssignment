@@ -18,9 +18,9 @@ import ingestors
 
 # COMMAND ----------
 
-catalog = "hive_metastore" #dbutils.widgets.get("catalog") 
-database = "gold" #dbutils.widgets.get("database") 
-table_name = "top_10_client_ips" #dbutils.widgets.get("tablename") 
+catalog = dbutils.widgets.get("catalog") #hive_metastore
+database = dbutils.widgets.get("database")  #gold
+table_name = dbutils.widgets.get("tablename") #top_10_client_ips
 
 # COMMAND ----------
 

@@ -19,9 +19,9 @@ import pipeline
 
 # COMMAND ----------
 
-table_name = "access_logs" #dbutils.widgets.get("tablename")
-catalog = "hive_metastore" #dbutils.widgets.get("catalog")
-database = "silver" #dbutils.widgets.get("database")
+table_name = dbutils.widgets.get("tablename") #access_logs
+catalog = dbutils.widgets.get("catalog") #hive_metastore 
+database = dbutils.widgets.get("database") #silver
 
 # COMMAND ----------
 

@@ -21,9 +21,9 @@ import ingestors
 
 # COMMAND ----------
 
-catalog = "hive_metastore"  #dbutils.widgets.get("catalog") #
-database = "bronze" #dbutils.widgets.get("database") #"
-table_name = "access_logs"  #dbutils.widgets.get("tablename") #
+catalog = dbutils.widgets.get("catalog") #hive_metastore
+database =  dbutils.widgets.get("database") #bronze
+table_name = dbutils.widgets.get("tablename") #access_logs
 
 
 # COMMAND ----------
