@@ -81,13 +81,14 @@ class IngestorCubo:
 
         - Construtor: Recebe como parâmetro o spark, catálogo de dados, database e nome da tabela.
         - set_query: Recebe como parâmetro o nome da tabela para executar a query SQL para análise do dado e criação da tabela fato.
-        - load: Recebe qualquer tipo de parâmetro para utilizar como filtro nas query`s SQL (está utilizando o **kwargs).
+        - load: Retorna um DF.
         - save: Recebe como parâmetro o df e salva em um Delta Table.
         - execute: Função responsável pela execução da classe.
 
     """
 
     def __init__(self, spark, catalog, database, tablename):
+
         self.spark = spark
         self.catalog = catalog
         self.database = database
@@ -100,26 +101,23 @@ class IngestorCubo:
     def set_query(self):
         self.query = utils.import_query(f"{self.tablename}.sql")
 
-    def load(self, **kwargs):
-        formatted_query = self.query.format(**kwargs)
-        df = self.spark.sql(formatted_query)
+    def load(self):
+        df = self.spark.sql(self.query)
         return df
     
     def save(self, df): 
 
-        self.spark.sql(f'DROP TABLE IF EXISTS {self.tablename}')
-
-        if not utils.table_exists(self.spark, self.catalog, self.databasename, self.tablename):
+        if not utils.table_exists(self.spark, self.catalog, self.database, self.tablename):
             (df.coalesce(1)
             .write
             .format('delta')
             .mode("overwrite")
-            .saveAsTable(self.table))
+            .saveAsTable(self.table_fullname))
         else:
             print("Tabela já existe!")
         
-    def execute(self, **kwargs):
-        df = self.load(**kwargs)
+    def execute(self):
+        df = self.load()
         self.save(df)
 
 

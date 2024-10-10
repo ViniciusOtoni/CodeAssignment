@@ -5,7 +5,9 @@
 # COMMAND ----------
 
 import sys
-sys.path.insert(0, "../lib/")
+sys.path.insert(0, "../lib/") # Inserindo o diretório para a primeira posição da lista
+
+# Importação dos módulos
 import utils
 import pipeline
 
