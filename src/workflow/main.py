@@ -31,7 +31,7 @@ def main():
         settings = load_settings(job_name=i)
         resp = reset_job(settings=settings)
         if resp.status_code == 200:
-            print(f"Job '{i}' atualizado")
+            print(f"Workflow '{i}' atualizado")
         else:
             print(f"Error: {resp.text}")
 
