@@ -94,3 +94,12 @@ if not utils.table_exists(spark, catalog, database, table_name):
 else:
     print("Tabela já existe, ignorando full-load")
 
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### Visualização da Delta Table
+
+# COMMAND ----------
+
+spark.sql("SELECT * FROM hive_metastore.bronze.access_logs").show()

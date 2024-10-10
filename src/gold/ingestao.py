@@ -37,3 +37,12 @@ ingest = ingestors.IngestorCubo(spark=spark,
                                     tablename=table_name)
 
 ingest.execute()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC #### Visualização do dado na Delta Table
+
+# COMMAND ----------
+
+spark.sql(f"SELECT * FROM hive_metastore.gold.{table_name}").show()
