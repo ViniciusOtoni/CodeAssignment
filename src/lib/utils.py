@@ -5,7 +5,7 @@ def import_query(path):
 
         Parâmetros:
         
-        path(String): Caminho para o arquivo com a extensão .sql
+        - path(String): Caminho para o arquivo com a extensão .sql
     """
     
     with open(path, 'r') as open_file:
@@ -20,10 +20,10 @@ def create_mount(spark, mount_name, source_url, conf_key, account_key):
 
         Parâmetros:
 
-        mount_name(String): Nome do mount a ser montado.
-        source_url(String): Path para acesso ao blob storage.
-        conf_key(String): Path para chave de acesso ao blob storage.
-        account_key(String): Chave de acesso do storage account.
+        - mount_name(String): Nome do mount a ser montado.
+        - source_url(String): Path para acesso ao blob storage.
+        - conf_key(String): Path para chave de acesso ao blob storage.
+        - account_key(String): Chave de acesso do storage account.
 
     """
     
@@ -48,12 +48,13 @@ def table_exists(spark, catalog, database, table):
 
         Parâmetros:
 
-        catalog(String): Nome do catálogo. 
-        database(String): Nome do database.
-        table(String): Nome da tabela.
+        - catalog(String): Nome do catálogo. 
+        - database(String): Nome do database.
+        - table(String): Nome da tabela.
 
     """
     count = (spark.sql(f"SHOW TABLES FROM {catalog}.{database}")
                 .filter(f"database = '{database}' AND tableName = '{table}'")
                 .count()) # Retorna a quantidade de tabelas encontradas.
     return count == 1 # Retorna valor boolean de acordo com o valor da variável count.
+
