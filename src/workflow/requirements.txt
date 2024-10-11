@@ -1,8 +1,8 @@
 python-dotenv==1.0.1
 Requests==2.32.3
-pyspark==3.5.0
-numpy==1.26.0   
-pandas==2.1.1
-setuptools==65.5.0
-wheel==0.41.2
-distutils
+pyspark==3.5.0  # Ou a versão mais recente suportada pelo seu projeto
+databricks-cli==0.17.6  # Para a integração com a API do Databricks
+numpy==1.26.0  # Biblioteca para computação numérica
+pandas==2.1.1  # Biblioteca para manipulação de dados
+setuptools==65.5.0  # Necessário para distutils e ferramentas de build
+wheel==0.41.2  # Utilitário para construir pacotes
