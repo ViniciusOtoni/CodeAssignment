@@ -3,19 +3,29 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   sync_jobs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v3 #Checkout do código
+      - uses: actions/setup-python@v4 #Configurando python 
         with:
           python-version: '3.12.4'
+
       - name: Instalando Requeriments
         working-directory: src/workflow
-        run: pip install -r requirements.txt
-      - name: Sync dos Jobs
+        run: pip install -r requirements.txt #Instalando os módulos para requisição da API
+
+      - name: Testes Unitários
+        working-directory: src/test
+        run: python main.py  #Rodando os testes unitários
+
+      - name: Sync dos Jobs 
+        if: ${{ success() }} # Se os testes passarem, fazer sync nos Jobs
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
