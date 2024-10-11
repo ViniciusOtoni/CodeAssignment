@@ -1,7 +1,13 @@
 import unittest
 from pyspark.sql import SparkSession, Row
-from ETL import RemoveNullsAndDuplicates, NormalizeTimestamp, CategorizeResponseCode, CountAccessByIP
+
+import sys
+import os
+sys.path.insert(0, "../lib/")
+
 import utils
+import ETL
+
 from unittest.mock import patch
 
 class TestUtils(unittest.TestCase): #herdando as funcionalidades da classe TestCase
@@ -38,7 +44,7 @@ class TestETL(unittest.TestCase):
 
     def test_remove_nulls_and_duplicates(self):
         # Testando remoção de nulos e duplicados
-        transformer = RemoveNullsAndDuplicates(subset_cols=["client_ip", "timestamp"])
+        transformer = ETL.RemoveNullsAndDuplicates(subset_cols=["client_ip", "timestamp"])
         df_transformed = transformer._transform(self.df) # passa o df para o método _transform
 
         # deve remover um nulo e um valor duplicado
@@ -46,7 +52,7 @@ class TestETL(unittest.TestCase):
 
     def test_normalize_timestamp(self):
         # Normalalização da coluna timestamp
-        transformer = NormalizeTimestamp(input_col="timestamp", output_col="timestamp_normalized")
+        transformer = ETL.NormalizeTimestamp(input_col="timestamp", output_col="timestamp_normalized")
         df_transformed = transformer._transform(self.df)
 
         # Verifica conversão
@@ -55,7 +61,7 @@ class TestETL(unittest.TestCase):
 
     def test_categorize_response_code(self):
         # Testando a criação das categorias
-        transformer = CategorizeResponseCode(input_col="response_code", output_col="response_category")
+        transformer = ETL.CategorizeResponseCode(input_col="response_code", output_col="response_category")
         df_transformed = transformer._transform(self.df)
 
         # Verificando se as categorias foram criadas de forma correta pelos seus respectivos status code.
@@ -67,7 +73,7 @@ class TestETL(unittest.TestCase):
 
     def test_count_access_by_ip(self):
         # Testando contagem de IP
-        transformer = CountAccessByIP(group_col="client_ip", output_col="access_count_per_ip")
+        transformer = ETL.CountAccessByIP(group_col="client_ip", output_col="access_count_per_ip")
         df_transformed = transformer._transform(self.df)
 
         # verificando count para "192.168.0.1"
