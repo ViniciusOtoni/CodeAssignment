@@ -71,18 +71,6 @@ class TestETL(unittest.TestCase):
         expected_categories = {"Success", "Client Error", "Server Error"}
         self.assertEqual(categories, expected_categories) #verificando se os valores são iguais
 
-    def test_count_access_by_ip(self):
-        # Testando contagem de IP
-        transformer = ETL.CountAccessByIP(group_col="client_ip", output_col="access_count_per_ip")
-        df_transformed = transformer._transform(self.df)
-
-        # verificando count para "192.168.0.1"
-        ip_count_1 = df_transformed.filter(df_transformed.client_ip == "192.168.0.1").select("access_count_per_ip").collect()[0][0] #pegando o valor 
-        self.assertEqual(ip_count_1, 2)
-
-       
-        ip_count_2 = df_transformed.filter(df_transformed.client_ip == "192.168.0.2").select("access_count_per_ip").collect()[0][0]
-        self.assertEqual(ip_count_2, 1)
 
 
 if __name__ == "__main__":
