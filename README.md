@@ -49,6 +49,9 @@ CodeAssignment/
 |   |  └──.env /* Responsável por armazenar as variáveis de ambiente  */
 |   |
 |   |
+|   └──test/
+|   |   └── main.py /* Arquivo que contém os testes unitários  */
+|   |
 |   ├── lib/
 │        └── ETL.py  /* Arquivo que contém as classes de Transformação  */
 │        └── ingestors.py /* Arquivo que contém as classes de Ingestão full-load e dimensional  */

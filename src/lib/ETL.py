@@ -83,33 +83,6 @@ class CategorizeResponseCode(Transformer):
         )
         return df_categorized
 
-
-
-
-class CountAccessByIP(Transformer):
-    
-    """
-        Classe que cria uma nova feature contando a quantidade de acessos por IP.
-
-        Métodos:
-
-        - Construtor: Recebe como parâmetro a coluna que contém o IP e o nome da coluna para output com o valor final.
-        - Transform: Cria a nova feature de contagem de acessos por endereço IP.
-        
-    """
-
-    def __init__(self, group_col, output_col):
-        self.group_col = group_col
-        self.output_col = output_col
-
-    def _transform(self, df: DataFrame) -> DataFrame:
-        # window funciton do SQL para realizar agregação 
-        window_spec = Window.partitionBy(self.group_col)
-        
-        #  Fazendo o COUNT por IP, mantendo as colunas originais do df
-        df_with_count = df.withColumn(self.output_col, count(col(self.group_col)).over(window_spec))
-        
-        return df_with_count
     
 
 

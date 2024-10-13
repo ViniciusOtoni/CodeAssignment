@@ -1,5 +1,5 @@
 from pyspark.ml import Pipeline
-from ETL import RemoveNullsAndDuplicates, NormalizeTimestamp, CategorizeResponseCode, CountAccessByIP
+from ETL import RemoveNullsAndDuplicates, NormalizeTimestamp, CategorizeResponseCode
 
 class Pipe:
 
@@ -16,13 +16,11 @@ class Pipe:
         remove_nulls_duplicates = RemoveNullsAndDuplicates(subset_cols=["client_ip", "timestamp"])
         normalize_timestamp = NormalizeTimestamp(input_col="timestamp", output_col="timestamp_normalized")
         categorize_response = CategorizeResponseCode(input_col="response_code", output_col="response_category")
-        count_access_by_ip = CountAccessByIP(group_col="client_ip", output_col="access_count_per_ip")
 
         # Adicionando as transformações no pipeline 
         return Pipeline(stages=[remove_nulls_duplicates, 
                                 normalize_timestamp, 
-                                categorize_response, 
-                                count_access_by_ip])  # Executado de forma sequencial
+                                categorize_response])  # Executado de forma sequencial
 
     def fit_pipeline(self, pipeline, df):
         return pipeline.fit(df)
