@@ -71,7 +71,8 @@ class TestETL(unittest.TestCase):
         expected_categories = {"Success", "Client Error", "Server Error"}
         self.assertEqual(categories, expected_categories) #verificando se os valores são iguais
 
-
+# Optei por não realizar alteração na coluna "response_size" dos dados com valor - 
+# Motivo: Não existe um padrão para realizar alteração dos dados ou signifique dado como 0. 
 
 if __name__ == "__main__":
     unittest.main()
