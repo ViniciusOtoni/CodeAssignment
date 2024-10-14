@@ -1,5 +1,9 @@
 # CodeAssignment Documentation
 
+## Assista ao vídeo de demonstração:
+
+[![Watch the video](https://img.youtube.com/vi/xBVcAkamnHY/maxresdefault.jpg)](https://youtu.be/xBVcAkamnHY)
+
 ### Introdução
 
 Este projeto tem como objetivo realizar análises de um arquivo com o padrão **Web Server Access Log** utilizando Pyspark, Delta Lake e Databricks. Ele segue uma abordagem ETL (Extract, Transform, Load), transformando dados brutos (camada bronze) em dados prontos para análise (camadas silver e gold), otimizando o armazenamento e a consulta por meio de modelos dimensionais e tabelas fato.
